@@ -1,10 +1,15 @@
-import {Box, Container, styled} from "@mui/material";
+import {Box, Container, styled, Typography} from "@mui/material";
+import {AccountCircle} from "@mui/icons-material";
+import * as React from "react";
 
 interface Props {
   history: string[],
 }
 
-const MessageBox = styled(Box)(() => ({
+const UserMessageBox = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
   maxWidth: '50vw',
   minWidth: '5vw',
   minHeight: '4.2vh',
@@ -12,13 +17,28 @@ const MessageBox = styled(Box)(() => ({
   wordBreak: 'break-all',
   padding: 8,
   marginTop: 24,
-  overflow:'hidden',
+  overflow: 'hidden',
 }))
 
-const HistoryContainer = styled(Container)(()=>({
+const BotMessageBox = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  alignSelf: 'flex-start',
+  maxWidth: '50vw',
+  minWidth: '5vw',
+  minHeight: '4.2vh',
+  background: 'blue',
+  wordBreak: 'break-all',
+  padding: 8,
+  marginTop: 24,
+  overflow: 'hidden',
+}))
+
+const HistoryContainer = styled(Container)(() => ({
   display: 'flex',
   alignItems: 'flex-end',
-  justifyContent:'center',
+  justifyContent: 'flex-end',
   flexDirection: 'column',
   minWidth: '60vw',
   maxWidth: '60vw',
@@ -32,29 +52,22 @@ export const ChatHistory = ({history}: Props) => {
 
   return (
     <HistoryContainer>
-      {history.map((message: string)=><MessageBox>{message}</MessageBox>)}
-      {/*<MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox> <MessageBox>*/}
-      {/*  awdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/}
-      {/*</MessageBox>*/}
-
+      {history.map((message: string, index: number) =>
+        index % 2 == 1 ?
+        <BotMessageBox>
+          <AccountCircle/>
+          <Typography sx={{marginLeft: 1}}>
+            {message}
+          </Typography>
+      </BotMessageBox>
+      :
+          <UserMessageBox>
+            <Typography sx={{marginRight: 1}}>
+              {message}
+            </Typography>
+            <AccountCircle/>
+          </UserMessageBox>
+      )}
     </HistoryContainer>
   )
 }
