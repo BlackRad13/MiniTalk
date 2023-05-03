@@ -22,7 +22,7 @@ export const ChatInput = memo(({handleSendMessage}: Props) => {
     setMessage('')
   }, [message]);
 
-  const isEnterDown = useCallback((event: { key: string }) => {
+  const isEnterDown = useCallback((event: KeyboardEvent) => {
     if (event.key == 'Enter') {
       handleClick()
     }
@@ -30,12 +30,11 @@ export const ChatInput = memo(({handleSendMessage}: Props) => {
 
   useEffect(() => {
     document.addEventListener('keydown', isEnterDown)
-
     return (): void => document.removeEventListener('keydown', isEnterDown)
   }, [])
 
   return (
-    <Box sx={{display: 'flex', justifyContent: 'center', alignSelf: 'flex-end', height: 'auto', width: '73vw', m: '16px 30px '}}>
+    <Box sx={{display: 'flex', justifyContent: 'center', alignSelf: 'flex-end', height: 'auto', width: '73%', m: '16px 30px '}}>
       <FormControl sx={{width: '40%', height: '100%'}} variant="outlined">
         <OutlinedInput
           id="outlined-adornment-password"
