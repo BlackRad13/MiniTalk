@@ -11,11 +11,11 @@ const UserMessageBox = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  maxWidth: '50%',
+  maxWidth: '70%',
   minWidth: '5%',
   height: 'auto',
   background: 'green',
-  wordBreak: 'break-all',
+  wordBreak: 'break-word',
   padding: 8,
   marginTop: 24,
 }))
@@ -25,23 +25,25 @@ const BotMessageBox = styled(Box)(() => ({
   alignItems: 'center',
   justifyContent: 'flex-start',
   alignSelf: 'flex-start',
-  maxWidth: '50%',
+  maxWidth: '70%',
   minWidth: '5%',
   background: 'grey',
-  wordBreak: 'break-all',
+  wordBreak: 'break-word',
   padding: 8,
   marginTop: 24,
 }))
 
 const HistoryContainer = styled(Container)(() => ({
   display: 'flex',
+  background: 'rgb(232,226,226)',
   alignItems: 'flex-end',
   justifyContent: 'flex-end',
   flexDirection: 'column',
   minWidth: '90%',
   maxWidth: '90%',
-  height: '60%',
-  overflow: 'auto'
+  height: '100%',
+  overflow: 'auto',
+  paddingBottom: 12
 }))
 
 export const ChatHistory = ({history} : Props) => {

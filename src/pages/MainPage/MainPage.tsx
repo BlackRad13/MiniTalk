@@ -2,10 +2,10 @@ import {memo} from "react";
 import {Container, styled} from "@mui/material";
 import {Chat} from "./Chat/Chat";
 
-const CenterContainer = styled(Container)(()=>({
+const CenterContainer = styled(Container)(() => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent:'center',
+  justifyContent: 'center',
   minWidth: '100vw',
   height: '100vh',
 }))

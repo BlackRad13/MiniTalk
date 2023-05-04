@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {ChangeEvent, memo, useCallback, useEffect, useState} from 'react';
-import Box from '@mui/material/Box';
+import {ChangeEvent, memo, useCallback, useState} from 'react';
 import SendIcon from '@mui/icons-material/Send';
-import {FormControl, IconButton, InputAdornment, OutlinedInput} from "@mui/material";
+import {Container, FormControl, IconButton, Input, InputAdornment, styled} from "@mui/material";
 import {AccountCircle} from "@mui/icons-material";
 import {HistoryFunction, MessageFunction} from "../../../models/ChatDTO";
 
@@ -10,6 +9,14 @@ interface Props {
   handleSendMessage: MessageFunction,
   changeHistory: HistoryFunction
 }
+
+const InputContainer = styled(Container)(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignSelf: 'flex-end',
+  height: 'auto',
+  width: '100%',
+}))
 
 export const ChatInput = memo(({handleSendMessage, changeHistory}: Props) => {
   const [message, setMessage] = useState('');
@@ -26,23 +33,23 @@ export const ChatInput = memo(({handleSendMessage, changeHistory}: Props) => {
     setMessage('')
   }, [message]);
 
-  const isEnterDown = useCallback((event: KeyboardEvent) => {
-    if (event.key == 'Enter') {
-      event.preventDefault()
-      handleClick()
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('keydown', isEnterDown)
-    return (): void => document.removeEventListener('keydown', isEnterDown)
-  }, [])
+  // const isEnterDown = useCallback((event: KeyboardEvent) => {
+  //   if (event.key == 'Enter') {
+  //     event.preventDefault()
+  //     handleClick()
+  //   }
+  // }, []);
+  //
+  // useEffect(() => {
+  //   document.addEventListener('keydown', isEnterDown)
+  //   return (): void => document.removeEventListener('keydown', isEnterDown)
+  // }, [])
 
   return (
-    <Box sx={{display: 'flex', justifyContent: 'center', alignSelf: 'flex-end', height: 'auto', width: '73%', m: '16px 30px '}}>
-      <FormControl sx={{width: '40%', height: '100%'}} variant="outlined">
-        <OutlinedInput
-          id="outlined-adornment-password"
+    <InputContainer disableGutters>
+      <FormControl sx={{width: '1000%', height: '100%', marginBottom:2, marginTop:2}} variant="outlined">
+        <Input
+          placeholder={'Введите ваш запрос...'}
           startAdornment={
             <InputAdornment position="start">
               <AccountCircle/>
@@ -62,7 +69,7 @@ export const ChatInput = memo(({handleSendMessage, changeHistory}: Props) => {
           onChange={handleChangeMessage}
         />
       </FormControl>
-    </Box>
+    </InputContainer>
 
   );
 })
