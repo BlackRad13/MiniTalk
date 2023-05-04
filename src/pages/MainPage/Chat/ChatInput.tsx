@@ -4,13 +4,14 @@ import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
 import {FormControl, IconButton, InputAdornment, OutlinedInput} from "@mui/material";
 import {AccountCircle} from "@mui/icons-material";
-import {SendMessage} from "../../../models/ChatDTO";
+import {HistoryFunction, MessageFunction} from "../../../models/ChatDTO";
 
 interface Props {
-  handleSendMessage: SendMessage
+  handleSendMessage: MessageFunction,
+  changeHistory: HistoryFunction
 }
 
-export const ChatInput = memo(({handleSendMessage}: Props) => {
+export const ChatInput = memo(({handleSendMessage, changeHistory}: Props) => {
   const [message, setMessage] = useState('');
 
   const handleChangeMessage = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -18,12 +19,16 @@ export const ChatInput = memo(({handleSendMessage}: Props) => {
   }, []);
 
   const handleClick = useCallback(() => {
-    handleSendMessage(message);
+    if (message.trim() !== '') {
+      changeHistory(message, 'user');
+      handleSendMessage(message);
+    }
     setMessage('')
   }, [message]);
 
   const isEnterDown = useCallback((event: KeyboardEvent) => {
     if (event.key == 'Enter') {
+      event.preventDefault()
       handleClick()
     }
   }, []);

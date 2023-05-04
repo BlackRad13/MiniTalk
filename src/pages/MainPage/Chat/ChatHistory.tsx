@@ -44,20 +44,20 @@ const HistoryContainer = styled(Container)(() => ({
   overflow: 'auto'
 }))
 
-export const ChatHistory = ({history}: Props) => {
+export const ChatHistory = ({history} : Props) => {
 
   return (
     <HistoryContainer>
-      {history.map((archivedMessage: ArchivedMessage) =>
+      {history.map((archivedMessage: ArchivedMessage, index: number) =>
         archivedMessage.from == 'bot' ?
-        <BotMessageBox>
-          <AccountCircle/>
-          <Typography sx={{marginLeft: 1}}>
-            {archivedMessage.message}
-          </Typography>
-      </BotMessageBox>
-      : archivedMessage.from == 'user' &&
-          <UserMessageBox>
+          <BotMessageBox key={index}>
+            <AccountCircle/>
+            <Typography sx={{marginLeft: 1}}>
+              {archivedMessage.message}
+            </Typography>
+          </BotMessageBox>
+          : archivedMessage.from == 'user' &&
+          <UserMessageBox key={index}>
             <Typography sx={{marginRight: 1}}>
               {archivedMessage.message}
             </Typography>

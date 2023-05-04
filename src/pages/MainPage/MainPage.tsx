@@ -2,7 +2,6 @@ import {memo} from "react";
 import {Container, styled} from "@mui/material";
 import {Chat} from "./Chat/Chat";
 
-
 const CenterContainer = styled(Container)(()=>({
   display: 'flex',
   alignItems: 'center',
@@ -12,7 +11,6 @@ const CenterContainer = styled(Container)(()=>({
 }))
 
 export const MainPage = memo(() => {
-
 
   return (
     <CenterContainer>
