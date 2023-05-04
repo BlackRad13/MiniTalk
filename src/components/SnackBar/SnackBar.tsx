@@ -1,10 +1,11 @@
 import {memo} from 'react'
-import {Snackbar , Alert, styled, alertClasses} from '@mui/material'
+import {Snackbar, Alert, styled, alertClasses} from '@mui/material'
 import {SnackbarDTO} from "../../models/ChatDTO";
 
 const StyledSnackbar = styled(Snackbar, {
   shouldForwardProp: (prop) => prop !== 'status',
 })<Pick<SnackbarDTO, 'status'>>(({status}) => ({
+  marginLeft: 1,
   borderRadius: 10,
   color: status == 'error' ? 'red' : 'green',
   [`& .${alertClasses.root}`]: {

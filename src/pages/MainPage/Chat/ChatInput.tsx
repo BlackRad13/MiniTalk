@@ -3,11 +3,13 @@ import {ChangeEvent, memo, useCallback, useState} from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import {Container, FormControl, IconButton, Input, InputAdornment, styled} from "@mui/material";
 import {AccountCircle} from "@mui/icons-material";
+import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import {HistoryFunction, MessageFunction} from "../../../models/ChatDTO";
 
 interface Props {
   handleSendMessage: MessageFunction,
-  changeHistory: HistoryFunction
+  handleReset: () => void,
+  changeHistory: HistoryFunction,
 }
 
 const InputContainer = styled(Container)(() => ({
@@ -15,10 +17,10 @@ const InputContainer = styled(Container)(() => ({
   justifyContent: 'center',
   alignSelf: 'flex-end',
   height: 'auto',
-  width: '100%',
+  width: '60%',
 }))
 
-export const ChatInput = memo(({handleSendMessage, changeHistory}: Props) => {
+export const ChatInput = memo(({handleSendMessage, handleReset, changeHistory}: Props) => {
   const [message, setMessage] = useState('');
 
   const handleChangeMessage = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -33,22 +35,11 @@ export const ChatInput = memo(({handleSendMessage, changeHistory}: Props) => {
     setMessage('')
   }, [message]);
 
-  // const isEnterDown = useCallback((event: KeyboardEvent) => {
-  //   if (event.key == 'Enter') {
-  //     event.preventDefault()
-  //     handleClick()
-  //   }
-  // }, []);
-  //
-  // useEffect(() => {
-  //   document.addEventListener('keydown', isEnterDown)
-  //   return (): void => document.removeEventListener('keydown', isEnterDown)
-  // }, [])
-
   return (
     <InputContainer disableGutters>
-      <FormControl sx={{width: '1000%', height: '100%', marginBottom:2, marginTop:2}} variant="outlined">
+      <FormControl sx={{width: '95%', height: '95%', marginBottom: 2, marginTop: 2}} variant="outlined">
         <Input
+          id="message-input"
           placeholder={'Введите ваш запрос...'}
           startAdornment={
             <InputAdornment position="start">
@@ -56,14 +47,26 @@ export const ChatInput = memo(({handleSendMessage, changeHistory}: Props) => {
             </InputAdornment>
           }
           endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                onClick={handleClick}
-                edge="end"
-              >
-                <SendIcon/>
-              </IconButton>
-            </InputAdornment>
+            <>
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClick}
+                  edge="end"
+                  disableRipple
+                >
+                  <SendIcon/>
+                </IconButton>
+              </InputAdornment>
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleReset}
+                  edge="end"
+                  disableRipple
+                >
+                  <RotateLeftIcon/>
+                </IconButton>
+              </InputAdornment>
+            </>
           }
           value={message}
           onChange={handleChangeMessage}
